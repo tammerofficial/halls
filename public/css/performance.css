@@ -1,0 +1,578 @@
+/* تحسين الأداء والسرعة */
+
+/* إعداد CSS للتسريع */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* تفعيل تسريع الأجهزة للعناصر المتحركة */
+.sidebar,
+.main-wrapper,
+.nav-link,
+.card,
+.btn,
+.modal,
+.dropdown-menu {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* تحسين الانتقالات */
+.nav-link,
+.btn,
+.card {
+    transition: all 0.2s ease-out;
+}
+
+/* تقليل مدة الانتقالات للسرعة */
+.sidebar {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* تحسين التمرير */
+.sidebar {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* تحسين عرض الصور */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* تحسين الذاكرة */
+.table-responsive {
+    contain: layout style paint;
+}
+
+/* تحسين العرض للجداول الكبيرة */
+.table {
+    table-layout: fixed;
+}
+
+/* تفعيل التحميل الكسول */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* تحسين أداء النماذج */
+.form-control:focus {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* تقليل repaint للظلال */
+.card,
+.btn {
+    contain: layout style;
+}
+
+/* تحسين أداء القوائم المنسدلة */
+.dropdown-menu {
+    transform: translate3d(0, 0, 0);
+}
+
+/* تحسين أداء الرسوم المتحركة */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* تحسين استجابة النقر */
+.btn,
+.nav-link,
+.card {
+    touch-action: manipulation;
+}
+
+/* تقليل التأخير في اللمس */
+.btn,
+.nav-link {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* تحسين أداء التبديل بين التبويبات */
+.tab-content .tab-pane {
+    display: none;
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* تحسين أداء الجداول */
+.table tbody tr {
+    contain: layout style;
+}
+
+/* تحسين عرض البيانات الكبيرة */
+.large-data {
+    contain: strict;
+    height: 400px;
+    overflow-y: auto;
+}
+
+/* تحسين أداء البحث المباشر */
+.search-results {
+    contain: layout style paint;
+}
+
+/* تحسين الذاكرة للمكونات المخفية */
+.d-none {
+    display: none !important;
+    visibility: hidden;
+}
+
+/* تحسين أداء الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translate3d(100%, 0, 0);
+    }
+    
+    .sidebar.show {
+        transform: translate3d(0, 0, 0);
+    }
+    
+    /* تقليل التأثيرات للأجهزة الضعيفة */
+    .card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* تحسين التحميل الأولي */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* تحسين أداء الإشعارات */
+.alert {
+    contain: layout style paint;
+}
+
+/* تحسين عرض الأيقونات */
+.fas,
+.far,
+.fab {
+    font-display: swap;
+}
+
+/* تحسين أداء الخطوط */
+@font-face {
+    font-family: 'Cairo';
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap');
+}
+
+/* تحسين أداء الخلفيات */
+.bg-gradient {
+    background-attachment: fixed;
+    will-change: background-position;
+}
+
+/* تفعيل ضغط CSS */
+.compress {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+/* تحسين أداء العناصر المتكررة */
+.repeated-element {
+    contain: strict;
+}
+
+/* تحسين الذاكرة للصور */
+img[loading="lazy"] {
+    content-visibility: auto;
+}
+
+/* تحسين أداء القوائم الطويلة */
+.long-list {
+    contain: strict;
+    overflow-y: auto;
+    height: 300px;
+}
+
+.long-list .list-item {
+    contain: layout style paint;
+}
+
+/* تحسين أداء المودال */
+.modal {
+    contain: layout style paint;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.2s ease-out;
+}
+
+/* تحسين أداء الكروت */
+.card-container {
+    contain: layout;
+}
+
+.card-container .card {
+    contain: style paint;
+}
+
+/* تحسين الاستجابة السريعة */
+.quick-response {
+    pointer-events: auto;
+    touch-action: manipulation;
+}
+
+/* تحسين أداء التحديثات المباشرة */
+.live-update {
+    contain: style paint;
+}
+
+/* تفعيل التخزين المؤقت للتحسين */
+.cache-optimized {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+}
+
+/* تحسين أداء الرسوم البيانية */
+.chart-container {
+    contain: strict;
+    isolation: isolate;
+}
+
+/* تحسين عرض البيانات الحية */
+.live-data {
+    contain: layout style paint;
+    will-change: contents;
+}
+
+/* تحسين أداء التصفية والبحث */
+.filter-container {
+    contain: layout style;
+}
+
+.search-input {
+    contain: layout style paint;
+}
+
+/* تحسين أداء الترقيم */
+.pagination {
+    contain: layout style paint;
+}
+
+/* تحسين التفاعل مع اللمس */
+@media (hover: none) {
+    .hover-effect:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* تحسين أداء التنقل بين الصفحات */
+.page-transition {
+    transition: opacity 0.2s ease-out;
+}
+
+.page-transition.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* تحسين عرض البيانات الكبيرة */
+.virtual-scroll {
+    contain: strict;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.virtual-scroll .item {
+    contain: layout style paint;
+    height: 50px;
+}
+
+/* ========= تحسينات السرعة الفائقة ========= */
+
+/* تسريع التنقل الفوري */
+.nav-link {
+    transition: all 0.1s ease-out !important;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-link:active {
+    transform: scale(0.98);
+    transition-duration: 0.05s !important;
+}
+
+/* تحسين وقت استجابة الصفحات */
+.main-wrapper {
+    contain: layout style;
+    transform: translateZ(0);
+}
+
+/* تسريع تحميل المحتوى */
+.content-area {
+    contain: layout style paint;
+    will-change: contents;
+}
+
+/* إزالة التأخير في التنقل */
+body {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* تحسين استجابة الروابط */
+a, .nav-link, .btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* تسريع الرسوم المتحركة */
+.fade-in,
+.slide-in {
+    animation-duration: 0.15s !important;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* تحسين أداء التمرير */
+.sidebar,
+.main-wrapper {
+    scroll-behavior: auto; /* إزالة التمرير السلس للسرعة */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* تقليل التأثيرات البصرية للسرعة */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* تحسين النقر السريع */
+.quick-nav {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.quick-nav:hover {
+    transform: translateX(-1px);
+    transition-duration: 0.05s !important;
+}
+
+/* إزالة التأخير في النقرات */
+* {
+    -webkit-touch-callout: none;
+}
+
+input, textarea, select {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+} 
+/* ========= تحسينات السرعة الفائقة الجديدة ========= */
+
+/* تسريع التنقل الفوري */
+.nav-link {
+    transition: all 0.05s ease-out !important;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-link:active {
+    transform: scale(0.98);
+    transition-duration: 0.02s !important;
+}
+
+/* تحسين وقت استجابة الصفحات */
+.main-wrapper {
+    contain: layout style;
+    transform: translateZ(0);
+}
+
+/* تسريع تحميل المحتوى */
+.content-area {
+    contain: layout style paint;
+    will-change: contents;
+}
+
+/* إزالة التأخير في التنقل */
+body {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* تحسين استجابة الروابط */
+a, .nav-link, .btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* تسريع الرسوم المتحركة */
+.fade-in,
+.slide-in {
+    animation-duration: 0.1s !important;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* تحسين أداء التمرير */
+.sidebar,
+.main-wrapper {
+    scroll-behavior: auto; /* إزالة التمرير السلس للسرعة */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* تقليل التأثيرات البصرية للسرعة */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* تحسين النقر السريع */
+.quick-nav {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.quick-nav:hover {
+    transform: translateX(-1px);
+    transition-duration: 0.02s !important;
+}
+
+/* إزالة التأخير في النقرات */
+* {
+    -webkit-touch-callout: none;
+}
+
+input, textarea, select {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* تحسين أداء الصفحة المحملة */
+body.loaded {
+    opacity: 1;
+    transition: opacity 0.1s ease;
+}
+
+/* تسريع التنقل في القائمة الجانبية */
+.sidebar .nav-link {
+    transition: all 0.05s ease !important;
+}
+
+.sidebar .nav-link:hover {
+    transform: translateX(-2px);
+    transition-duration: 0.02s !important;
+}
+
+/* تحسين أداء الجداول */
+.table {
+    contain: layout style;
+}
+
+.table tbody tr {
+    contain: layout style;
+}
+
+/* تحسين أداء البطاقات */
+.card {
+    contain: layout style;
+    will-change: transform;
+}
+
+/* تسريع الأزرار */
+.btn {
+    transition: all 0.05s ease !important;
+    touch-action: manipulation;
+}
+
+.btn:active {
+    transform: scale(0.98);
+    transition-duration: 0.02s !important;
+}
+
+/* تحسين أداء النماذج */
+.form-control {
+    transition: border-color 0.05s ease !important;
+}
+
+/* تسريع التبويبات */
+.tab-content .tab-pane {
+    contain: layout style;
+}
+
+/* تحسين أداء القوائم المنسدلة */
+.dropdown-menu {
+    contain: layout style;
+    transition: all 0.05s ease !important;
+}
+
+/* تسريع التنقل العام */
+a[href] {
+    transition: all 0.05s ease !important;
+}
+
+a[href]:active {
+    transform: scale(0.98);
+    transition-duration: 0.02s !important;
+}
+
+/* تحسين أداء الصور */
+img {
+    contain: layout style;
+}
+
+/* تسريع التحميل */
+.loading {
+    opacity: 0.8;
+    transition: opacity 0.05s ease;
+}
+
+/* تحسين أداء الأيقونات */
+.fas, .far, .fab {
+    contain: layout style;
+}
+
+/* تسريع التنقل النهائي */
+.fast-nav-enabled {
+    transition: all 0.05s ease !important;
+}
+
+.fast-nav-enabled * {
+    transition-duration: 0.05s !important;
+}
+
+.fast-nav-enabled *:active {
+    transition-duration: 0.02s !important;
+}
