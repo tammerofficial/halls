@@ -189,6 +189,7 @@ class TenantService
         try {
             DB::statement("USE `{$databaseName}`");
             
+            // إضافة المستخدم إلى جدول users
             DB::table('users')->insert([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -199,6 +200,19 @@ class TenantService
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+            // إضافة المستخدم إلى جدول العملاء إذا لم يكن موجوداً
+            if (!DB::table('customers')->where('email', $data['email'])->exists()) {
+                DB::table('customers')->insert([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone' => $data['phone'],
+                    'address' => $data['address'] ?? '',
+                    'is_active' => true,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
 
             // العودة لقاعدة البيانات الرئيسية
             DB::statement("USE " . config('database.connections.mysql.database'));

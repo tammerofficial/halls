@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -70,6 +71,19 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        // إضافة المستخدم إلى جدول العملاء إذا لم يكن موجوداً
+        if (!DB::table('customers')->where('email', $request->email)->exists()) {
+            DB::table('customers')->insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone ?? '',
+                'address' => $request->address ?? '',
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
